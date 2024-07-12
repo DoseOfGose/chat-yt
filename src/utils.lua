@@ -30,9 +30,33 @@ local function print_stats(stats)
 	print("\tTotal Time:\t\t" .. stats.total_time .. " sec")
 end
 
+local function unescape_html_entities(text)
+	local html_entities = {
+		["&#38;"] = "&",
+		["&amp;"] = "&",
+		["&#34;"] = '"',
+		["&quot;"] = '"',
+		["&#39;"] = "'",
+		["&apos;"] = "'",
+		["&#60;"] = "<",
+		["&lt;"] = "<",
+		["&#62;"] = ">",
+		["&gt;"] = ">",
+		["&#160;"] = " ",
+		["&nbsp;"] = " ",
+	}
+
+	for k, v in pairs(html_entities) do
+		text = text:gsub(k, v)
+	end
+
+	return text
+end
+
 return {
 	flags = flags,
 	debug_print = debug_print,
 	verbose_print = verbose_print,
 	print_stats = print_stats,
+	unescape_html_entities = unescape_html_entities,
 }

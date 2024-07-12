@@ -3,6 +3,7 @@
 local utils = require("src/utils")
 local youtube = require("src/youtube")
 local openai = require("src/openai")
+local chat = require("src/interactive_cli")
 
 local function converse_with_gpt(youtube_video_id, optional_model)
 	local start_time = os.clock()
@@ -34,7 +35,8 @@ end
 local function cli_input_handler()
 	local http_vid = arg[1]
 	if http_vid == nil then
-		print("Please provide a YouTube video ID or URL")
+		-- print("Please provide a YouTube video ID or URL")
+		chat.interactive_app_run()
 		return
 	end
 
